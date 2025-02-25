@@ -20,20 +20,21 @@ const clientMiddleware =
   async (action) => {
     try {
       if (action.type === LOAD_CLIENTS_START) {
-        const clients = await api.clientApi.getClientsFromLocalStorage();
+        const clients = await api.clientApi.fetchData();
         dispatch(loadClientsSuccess(clients)); 
 
       } else if (action.type === ADD_CLIENT_START) {
         debugger
-        const newClient = await api.clientApi.addClientToLocalStorage(action.payload);
+        const newClient = await api.clientApi.insertData(action.payload);
         dispatch(addClientSuccess(newClient));
 
       } else if (action.type === UPDATE_CLIENT_START) {
-        const updatedClient = await api.clientApi.updateClientInLocalStorage(action.payload);
+        const updatedClient = await api.clientApi.updateData(action.payload);
         dispatch(updateClientSuccess(updatedClient));
 
       } else if (action.type === DELETE_CLIENT_START) {
-        const deletedClient = await api.clientApi.deleteClientFromLocalStorage(action.payload);
+        debugger
+        const deletedClient = await api.clientApi.deleteData(action.payload);
         dispatch(deleteClientSuccess(deletedClient));
 
       }
